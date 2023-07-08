@@ -1,0 +1,12 @@
+.demo-li {
+  cursor: pointer;
+}
+.CardCtx{
+  width: inherit;
+  display: flex;
+  flex-wrap: wrap;
+  .divItem{
+    margin-right: 20px;
+    margin-bottom: 10px;
+  }
+}

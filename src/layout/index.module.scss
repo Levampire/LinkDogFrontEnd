@@ -1,0 +1,88 @@
+.ctx {
+  height: 100%;
+}
+
+.logo-vertical {
+  height: inherit;
+  width: 300px;
+  border-radius: 6px;
+  background-image: url(@/assets/LinkDog.svg);
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: left;
+}
+
+.menu {
+  padding: 15px 30px 0px 10px;
+  border: none !important;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 80px;
+  background: transparent;
+  padding: 0 20px;
+  border-bottom: 1px solid;
+  border-color: #e8ebf2;
+  z-index: 999;
+
+  .buttonGroup {
+    display: flex !important;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 300px;
+    background-color: #73a6ff;
+
+    .margin-button {
+      margin-left: 10px;
+    }
+  }
+
+}
+
+.content {
+  background-color: transparent;
+  height: calc(100vh - 195px);
+  border-top-width: 1px;
+  border-right-width: 1px;
+  border-left-width: 1px;
+  border-bottom-width: 1px;
+  border-color: #e8ebf2;
+  border-radius: 10px 0 0 10px;
+  padding: 20px;
+}
+
+.breadcrumbCTX {
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.buttonGroup {
+  width: 200px;
+}
+
+//back
+.round-leftTop {
+  position: absolute;
+  bottom: -120px;
+  left: 150px;
+  border-radius: 50%;
+  background: radial-gradient(#1d7bff, #529bff, #ffffff);
+  width: 200px;
+  height: 200px;
+  z-index: -1;
+}
+
+.round-rightEnd {
+  position: absolute;
+  top: 60px;
+  right: -40px;
+  border-radius: 50%;
+  background: radial-gradient(#1d7bff, #529bff, #ffffff);
+  width: 100px;
+  height: 100px;
+}
