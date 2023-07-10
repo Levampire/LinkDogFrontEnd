@@ -19,7 +19,7 @@ function DetialModel(props: Props) {
   const [runStatus, setRunStatus] = useState(props.projectDto.status === '0');
   const { Title, Text, Link, Paragraph } = Typography;
   const [logList, setLogList] = useState([]);
-  const [hasResultPath, sethasResultPath] = useState(
+  const [hasResultPath, setHasResultPath] = useState(
     !props.projectDto?.hasResultPath
   );
   let ws: WebSocket;
@@ -67,7 +67,6 @@ function DetialModel(props: Props) {
           setRunStatus(false);
           ws.send('close' + props.projectDto?.name);
           ws.close();
-          sethasResultPath(true);
           props.updateCards();
         }
         if (evt.data !== '') {
