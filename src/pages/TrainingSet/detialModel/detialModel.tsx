@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Button, Collapse, Divider, message, Modal, Typography } from 'antd';
+import { Button, Collapse, message, Modal, Typography } from 'antd';
 import { DownloadOutlined, PoweroffOutlined } from '@ant-design/icons';
 import classNames from 'classnames/bind';
 import styles from '@/layout/index.module.scss';
 import { downLoadTrainingResult, startTraining } from '@/api/feature/app';
-import { retry } from '@reduxjs/toolkit/query';
 
 interface Props {
   open: boolean;
@@ -13,6 +12,7 @@ interface Props {
   projectDto: any;
   updateCards: any;
 }
+
 function DetialModel(props: Props) {
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
@@ -45,6 +45,7 @@ function DetialModel(props: Props) {
       }
     }
   }
+
   const cx = classNames.bind(styles);
   const handleGetServer = () => {
     if ('WebSocket' in window) {
@@ -99,7 +100,12 @@ function DetialModel(props: Props) {
       const link = document.createElement('a'); //创建a标签
       link.style.display = 'none';
       link.href = url; // 设置a标签路径
-      link.download = props.projectDto?.name + '.joblib'; //设置文件名， 也可以这种写法 （link.setAttribute('download', '名单列表.xls');
+      //1-训练集 2- 测试集
+      if (props.projectDto.type === '1') {
+        link.download = props.projectDto?.name + '.joblib'; //设置文件名
+      } else {
+        link.download = props.projectDto?.name + '.txt'; //设置文件名
+      }
       document.body.appendChild(link);
       link.click();
       URL.revokeObjectURL(link.href); // 释放 URL对象

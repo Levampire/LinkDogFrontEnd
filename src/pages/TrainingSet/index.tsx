@@ -1,31 +1,12 @@
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import {
-  selectCount,
-  decremented,
-  incremented,
-} from '@/store/feature/appSlice';
-import { deleteUser, getUserData, selectUser } from '@/store/feature/userSlice';
+import { selectCount } from '@/store/feature/appSlice';
+import { selectUser } from '@/store/feature/userSlice';
 import classNames from 'classnames/bind';
 import styles from './index.module.scss';
-import { Button, Card, Modal, Row, Space, Tag, Typography } from 'antd';
-import {
-  CaretRightFilled,
-  CheckCircleOutlined,
-  ClockCircleOutlined,
-  CloseCircleOutlined,
-  DeleteOutlined,
-  ExclamationCircleOutlined,
-  FormOutlined,
-  LoadingOutlined,
-  LoginOutlined,
-  PlusOutlined,
-  PoweroffOutlined,
-  SyncOutlined,
-} from '@ant-design/icons';
-import React, { JSX, useEffect, useState } from 'react';
-import axios from 'axios';
+import { Button, Space } from 'antd';
+import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import React, { useEffect, useState } from 'react';
 import { getProject } from '@/api/feature/app';
-import DetialModel from '@/pages/TrainingSet/detialModel/detialModel';
 import EditFormModel from '@/pages/TrainingSet/editFormModel/editFormModel';
 import ProjectCard from '@/pages/TrainingSet/projectCard/projectCard';
 
@@ -42,10 +23,12 @@ function TrainingSet() {
   const [projectList, setProjectList] = useState<any>([]);
 
   const [openAddModel, setOpenAddModel] = useState(false);
+
   function setOpenModel(e: React.MouseEvent, type: any) {
     e.stopPropagation();
     if (type === 'add') setOpenAddModel(true);
   }
+
   useEffect(() => {
     const fetchData = async () => {
       const res = await getProject({ type: '1' });
@@ -54,10 +37,12 @@ function TrainingSet() {
     };
     fetchData();
   }, []);
+
   async function loadProjectData() {
     const res = await getProject({ type: '1' });
     setProjectList(res.data);
   }
+
   if (loading) {
     return <LoadingOutlined />;
   } else {
@@ -78,7 +63,7 @@ function TrainingSet() {
           setEditOpen={setOpenAddModel}
           operType={'0'}
           projectDto={null}
-          dataType={'1'}
+          dataType={'0'}
           updateCards={loadProjectData}
         />
         <div className={cx('CardCtx')}>

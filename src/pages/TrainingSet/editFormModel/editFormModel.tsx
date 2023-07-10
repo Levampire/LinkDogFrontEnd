@@ -1,9 +1,7 @@
 import React, { useRef, useState } from 'react';
-import { Button, Form, Input, message, Modal, Tag, Upload } from 'antd';
+import { Button, Form, Input, Modal, Tag } from 'antd';
 import { ExclamationCircleOutlined, UploadOutlined } from '@ant-design/icons';
-import { UploadProps } from 'antd/lib';
-import useTextFileReader from '@/utils/diyHook/fileReaderHook';
-import { addProject, editProject, getProject } from '@/api/feature/app';
+import { addProject, editProject } from '@/api/feature/app';
 
 interface Props {
   open: boolean;
@@ -15,6 +13,7 @@ interface Props {
   dataType: string;
   updateCards: any;
 }
+
 const TYPE_EDIT = '1';
 const TYPE_ADD = '0';
 const objectItem = {
@@ -27,6 +26,7 @@ const objectItem = {
   runningTime: null,
   newName: '',
 };
+
 function EditFormModel(props: Props) {
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
@@ -64,15 +64,17 @@ function EditFormModel(props: Props) {
   }
 
   async function subMitData() {
-    objectItem.name = props.projectDto.name;
-    objectItem.newName = projectName;
     objectItem.filePath = filePath.replace(`\\\\`, `\\`);
     objectItem.type = props.dataType === '0' ? '1' : '2';
     objectItem.status = '';
     let res;
+    console.log(props);
     if (props.operType === '0') {
+      objectItem.name = projectName;
       res = await addProject(objectItem);
     } else {
+      objectItem.name = props.projectDto?.name;
+      objectItem.newName = projectName;
       res = await editProject(objectItem);
     }
     closeModel();
