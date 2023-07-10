@@ -26,6 +26,13 @@ const Home = () => {
   };
   useEffect(() => {
     const fetchData = async () => {
+      const tokenRes = await axios(
+        'https://v2.jinrishici.com/one.json?client=npm-sdk/1.0'
+      );
+      window.localStorage.setItem(
+        'jinrishici-token',
+        tokenRes.data?.token || ''
+      );
       const res = await axios(
         'https://v2.jinrishici.com/one.json?client=npm-sdk/1.0&X-User-Token=' +
           encodeURIComponent(
@@ -33,7 +40,7 @@ const Home = () => {
           )
       );
       if (phrase == undefined) {
-        setPhrase('你好！' + res.data.data.content);
+        setPhrase(res.data.data.content);
       }
       setLoadStatus(false);
     };
@@ -45,6 +52,9 @@ const Home = () => {
     return (
       <>
         <Typography.Title level={4}>{phrase}</Typography.Title>
+        <span>*本次训练和测试所用的算法为随机森林。</span>
+        <br />
+        <br />
         <Space direction="horizontal" size={16}>
           <Card
             hoverable
