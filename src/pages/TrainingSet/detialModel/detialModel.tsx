@@ -50,7 +50,6 @@ function DetialModel(props: Props) {
   const handleGetServer = () => {
     if ('WebSocket' in window) {
       if (ws !== undefined) {
-        ws.send('客户端销毁socket');
         ws.close();
       }
       ws = new WebSocket(
@@ -66,6 +65,7 @@ function DetialModel(props: Props) {
         const received_msg = evt.data;
         if (evt.data === 'ScriptEndLinkDog') {
           setRunStatus(false);
+          ws.send('close' + props.projectDto?.name);
           ws.close();
           sethasResultPath(true);
           props.updateCards();
